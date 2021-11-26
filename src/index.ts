@@ -1,31 +1,38 @@
-const returnStr=(str:string|null)=>{
-    if(str){
-        return str[0].toUpperCase()+str.substr(1);
-    }
+interface IProfile{
+    readonly name:string
+    age:number
 }
 
-console.log(returnStr("hello"))
-
-const array1:string[]=["x","y"];
-const array2:Array<string>=array1;
-console.log(array1); 
-// enum
-enum Color{
-    Red,
-    Green = "김민지",
-    Blue = "This is my data"
+const profile : IProfile = {
+    name:"minji",
+    age:10
 }
 
-const Green :Color =Color.Green;
-const Red :Color =Color.Red;
-const Blues :Color =Color.Blue;
-console.log({Green,Red,Blues},"enmum");
 
-const email = document.querySelector(".email");
-
-if(email){
-    email.addEventListener("change",e=>{
-        const target = e.currentTarget as HTMLInputElement;
-        console.log(target.value);
-    })
+// object value 
+interface IA{
+    someProp:string;
+    [key:string]:number | string;
 }
+
+const a:IA ={
+    someProp : "somp props"
+};
+
+a.x ="minji";
+a.t =2;
+console.log(a,"@@@");
+
+// 
+
+interface Sumb{
+    (a:number,b:number):number;
+    prop1:string;
+}
+
+const sum:Sumb =(a,b)=>{
+    return a+b;
+}
+
+const hello = sum.prop1="miniji";
+
