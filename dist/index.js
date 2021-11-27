@@ -12,4 +12,4 @@ console.log(a, "@@@");
 const sum = (a, b) => {
     return a + b;
 };
-const hello = sum.prop1 = "miniji";
+const hello = sum.prop1 = "miniㅇㅇㅇji";
