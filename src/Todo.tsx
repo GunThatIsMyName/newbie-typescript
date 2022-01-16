@@ -1,4 +1,3 @@
-import React from "react";
 import { ListType } from "./App";
 
 type TodoType = {
@@ -8,9 +7,9 @@ type TodoType = {
 
 const Todo = ({ task, handleDelete }: TodoType) => {
   return (
-    <div>
-      <h1>{task.task}</h1>
-      <p>{task.number}</p>
+    <div className="todo__list">
+      🔥Task : <h1>{task.task}</h1>
+      💠Count: <p>{task.number}</p>
       <button onClick={() => handleDelete(task.id)}>❌</button>
     </div>
   );

@@ -38,7 +38,7 @@ const App: FC = () => {
         <div className="input-container">
           <input
             type="text "
-            placeholder="task"
+            placeholder="how hungry are you?"
             name="task"
             value={task}
             onChange={handleChange}
@@ -51,7 +51,7 @@ const App: FC = () => {
             onChange={handleChange}
           />
         </div>
-        <button onClick={addItem}>add task</button>
+        <button className="input__btn" onClick={addItem}>add task</button>
       </div>
 
       <div className="todo-list">
