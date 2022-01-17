@@ -8,8 +8,9 @@ import AddShoppingCart from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
 
 // styles
-import { Wrapper } from "./styles/App.styles";
+import { StyledButton, Wrapper } from "./styles/App.styles";
 import Item from "./component/Item";
+import Cart from "./component/Cart";
 
 // Type
 
@@ -30,6 +31,9 @@ const getData = async (): Promise<ProductsProps[]> => {
 };
 
 function App() {
+  const [isSideBar, setSideBar] = useState(false);
+  const [cartItem, setCartItem] = useState<ProductsProps[]>([]);
+
   const { data, isLoading, error } = useQuery<ProductsProps[]>(
     "products",
     getData
@@ -38,16 +42,74 @@ function App() {
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went Wrong</div>;
 
-  const totalItem = (): null => null;
-  const addToCart = () => null;
-  const removeFromCart = (): null => null;
+  const totalItem = (items: ProductsProps[]): number => {
+    return items.reduce((total, curr) => {
+      return total + curr.amount;
+    }, 0);
+  };
+
+  const addToCart = (clickedItem: ProductsProps):void => {
+
+    const sameItem = cartItem.find(item=>item.id === clickedItem.id);
+
+    if(sameItem){
+      const newList = cartItem.map(item=>{
+        if(item.id === clickedItem.id){
+          return {...item,amount:item.amount+1}
+        }
+        return item;
+      })
+      setCartItem(newList);
+    }else{
+      setCartItem(prev=>[...prev,{...clickedItem,amount:1}])
+    }
+
+    // setCartItem((prev) => {
+    //   const isFirstItem = prev.find((item) => item.id === clickedItem.id);
+    //   if (isFirstItem) {
+    //     return prev.map((item) => {
+    //       if (item.id === clickedItem.id) {
+    //         return { ...item, amount: item.amount + 1 };
+    //       }
+    //       return item;
+    //     });
+    //   }
+    //   return [...prev, { ...clickedItem, amount: 1 }];
+    // });
+    
+  };
+
+  const removeFromCart = (id:number):void => {
+    const newList = cartItem.map(item=>{
+      if(item.id === id){
+        return {...item,amount:item.amount-1}
+      }
+      return item;
+    }).filter(item=> item.amount !== 0);
+
+    setCartItem(newList);
+  };
 
   return (
     <Wrapper className="App">
+      <Drawer anchor="right" open={isSideBar} onClose={() => setSideBar(false)}>
+        <Cart
+          cartItems={cartItem}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+        />
+      </Drawer>
+
+      <StyledButton onClick={() => setSideBar(true)}>
+        <Badge badgeContent={totalItem(cartItem)} color="error">
+          <AddShoppingCart />
+        </Badge>
+      </StyledButton>
+
       <Grid container spacing={3}>
         {data?.map((item) => {
           return (
-            <Grid item key={item.id} xs={12} sm={4} >
+            <Grid item key={item.id} xs={12} sm={4}>
               <Item item={item} addToCart={addToCart} />
             </Grid>
           );
