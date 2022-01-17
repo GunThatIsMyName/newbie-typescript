@@ -5,7 +5,7 @@ type TodoType = {
   handleDelete(id: string): void;
 };
 
-const Todo = ({ task, handleDelete }: TodoType) => {
+const Todo:React.FC<TodoType>= ({ task, handleDelete }) => {
   return (
     <div className="todo__list">
       🔥Task : <h1>{task.task}</h1>

@@ -7,7 +7,7 @@ export type ListType = {
   id: string;
 };
 
-const App: FC = () => {
+const App: React.FC = () => {
   const [task, setTask] = useState<string>("");
   const [number, setNumber] = useState<number>(0);
   const [list, setList] = useState<ListType[]>([]);
