@@ -38,21 +38,9 @@ export const createBoard = (): CardType[] =>
       frontImage: item,
       clickable: true,
       matchingCardId:
-        index < item.length
+        index < cards.length
           ? `item${index + cards.length}`
           : `item${index - cards.length}`,
     };
   });
 
-// export const createBoard = (): CardType[] =>
-//   [...cards, ...cards].map((item, index) => ({
-//     id: `item${index}`,
-//     flipped: false,
-//     backImage: cardback,
-//     frontImage: item,
-//     clickable: true,
-//     matchingCardId:
-//       index < item.length
-//         ? `item${index + cards.length}`
-//         : `item${index - cards.length}`,
-//   }));
