@@ -5,17 +5,21 @@
     }
 
     class Ice implements ICode {
-        constructor(
-            cold:boolean,
-            count:number,
+        protected constructor(
+            private cold:boolean,
+            private count:number,
         ){}
+
+        static makeIce (cold:boolean,cube:number){
+            return new Ice(cold,cube);
+        }
 
         isItCold():void{
             eval("console").log("THIS IS FUCKING COLD@");
         }
     }
 
-    const ice = new Ice(true,2);
+    const ice = Ice.makeIce(true,2);
     eval("console").log(ice,"ice");
 
     class IceCream extends Ice{
