@@ -1,6 +1,7 @@
 // GENERIC 을 사용해서 값을 좀더 유연하게 받을수 있는데
 // 심지어 타입도 보장 받을수 있다.
 
+
 interface INike<L,R>{
     force:()=>L;
     jordan:()=>R;
